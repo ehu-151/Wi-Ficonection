@@ -28,7 +28,7 @@
                 android:inputType="textPersonName"
                 android:hint="ID"
                 android:ems="10"
-                android:id="@+id/editText2" />
+                android:id="@+id/id" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -36,18 +36,18 @@
                 android:inputType="textPassword"
                 android:hint="Password"
                 android:ems="10"
-                android:id="@+id/editText" />
+                android:id="@+id/password" />
 
             <Button
                 android:text="保存"
-                android:onClick="onClick"
+                android:onClick="save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/save" />
 
             <Button
                 android:text="接続"
-                android:onClick="onClick"
+                android:onClick="connect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/connect" />
