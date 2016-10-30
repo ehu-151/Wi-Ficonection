@@ -14,7 +14,10 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:orientation="vertical"
@@ -38,16 +41,23 @@
                 android:ems="10"
                 android:id="@+id/password" />
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="接続するSSID"
+                android:ems="10"
+                android:id="@+id/ssid" />
             <Button
                 android:text="保存"
-                android:onClick="save"
+                android:onClick="onClick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/save" />
 
             <Button
                 android:text="接続"
-                android:onClick="connect"
+                android:onClick="onClick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/connect" />

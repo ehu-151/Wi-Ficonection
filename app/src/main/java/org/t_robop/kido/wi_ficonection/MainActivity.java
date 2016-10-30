@@ -29,22 +29,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //IDとPasswordの保存
-    public void save(View v){
-        //保存
-        SharedPreferences data = getSharedPreferences("IdInfo",MODE_PRIVATE);
-        SharedPreferences.Editor editor = data.edit();
-        editor.putString("id", id.getText().toString());
-        editor.putString("password", password.getText().toString());
-        editor.apply();
-    }
-    public void connect(View v){
-        final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
-        //Wi-FiのON OFFを確認
-        if (wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
-            //ONの時
-        }else {
-            //OFFの時
-            Toast.makeText(this, "Wi-FiをONにしてください", Toast.LENGTH_SHORT).show();
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.save:
+                //保存
+                SharedPreferences data = getSharedPreferences("IdInfo",MODE_PRIVATE);
+                SharedPreferences.Editor editor = data.edit();
+                editor.putString("id", id.getText().toString());
+                editor.putString("password", password.getText().toString());
+                editor.apply();
+                Toast.makeText(this, "保存しました", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.connect:
+                final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+                //Wi-FiのON OFFを確認
+                if (wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
+                    //ONの時
+                }else {
+                    //OFFの時
+                    Toast.makeText(this, "Wi-FiをONにしてください", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
         }
     }
 }
