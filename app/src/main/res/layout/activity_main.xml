@@ -38,6 +38,20 @@
                 android:ems="10"
                 android:id="@+id/editText" />
 
+            <Button
+                android:text="保存"
+                android:onClick="onClick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button" />
+
+            <Button
+                android:text="接続"
+                android:onClick="onClick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/connect" />
+
         </LinearLayout>
 
         <LinearLayout
