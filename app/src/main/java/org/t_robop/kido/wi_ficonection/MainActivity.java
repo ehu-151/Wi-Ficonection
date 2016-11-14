@@ -1,6 +1,7 @@
 package org.t_robop.kido.wi_ficonection;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
@@ -59,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
                 //目的のSSIDがあるか確認
                 if (searcher.search(context, searchSSID) == true) {
                     //WebViewを開く
+                    Intent intent = new Intent(MainActivity.this,LoginFormActivity.class);
+                    startActivity(intent);
                 }
                 break;
             default:
