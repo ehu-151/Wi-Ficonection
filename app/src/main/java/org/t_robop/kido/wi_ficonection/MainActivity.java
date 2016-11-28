@@ -1,5 +1,7 @@
 package org.t_robop.kido.wi_ficonection;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
@@ -16,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
     EditText editTextID;
     EditText editTextPassword;
     EditText editTextSSID;
+    //クラスの初期化
+    SSIDSearcher searcher = new SSIDSearcher();
+    Context context;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,22 +29,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //EditTextの関連付け
-        editTextID =(EditText) findViewById(R.id.id);
-        editTextPassword =(EditText) findViewById(R.id.password);
-        editTextSSID =(EditText) findViewById(R.id.ssid);
-
+        editTextID = (EditText) findViewById(R.id.id);
+        editTextPassword = (EditText) findViewById(R.id.password);
+        editTextSSID = (EditText) findViewById(R.id.ssid);
+        //起動時にID,Password,SSIDを読み込む
         SharedPreferences data = getSharedPreferences("IdInfo", MODE_PRIVATE);
-        editTextID.setText(data.getString("ID",""));
-        editTextPassword.setText(data.getString("password",""));
-        editTextSSID.setText(data.getString("SSID",""));
+        editTextID.setText(data.getString("ID", ""));
+        editTextPassword.setText(data.getString("password", ""));
+        editTextSSID.setText(data.getString("SSID", ""));
     }
 
-    //IDとPasswordの保存
-    public void onClick(View v){
-        switch (v.getId()){
+    //
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.save:
-                //保存
-                SharedPreferences data = getSharedPreferences("IdInfo",MODE_PRIVATE);
+                //ID,Password,SSIDの保存
+                SharedPreferences data = getSharedPreferences("IdInfo", MODE_PRIVATE);
                 SharedPreferences.Editor editor = data.edit();
                 editor.putString("ID", editTextID.getText().toString());
                 editor.putString("password", editTextPassword.getText().toString());
@@ -48,33 +54,14 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "保存しました", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.connect:
-                final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
-                //Wi-FiのON OFFを確認
-                if (wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
-                    //ONの時
-                    //トーストで通知
-                    Toast.makeText(this, "Wi-FiがONです", Toast.LENGTH_SHORT).show();
-                    //目的のSSIDを変数に入れる
-                    final String searchSSID = editTextSSID.getText().toString();
-                    // SSIDを取り出す
-                    List<ScanResult> results = wifiManager.getScanResults();
-                    for (int i=0;i<results.size();++i) {
-                        final String listSSID = results.get(i).SSID;
-                        //目的のSSIDを探す
-                        //見つかった場合
-                        if(listSSID.equals(searchSSID)){
-                            //トーストで通知
-                            Toast.makeText(this, searchSSID+"が見つかりました!", Toast.LENGTH_SHORT).show();
-                            break;
-                        }//見つからない場合
-                        if (i==results.size()-1){
-                            //トーストで通知
-                            Toast.makeText(this, searchSSID+"はありません", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }else {
-                    //OFFの時
-                    Toast.makeText(this, "Wi-FiをONにしてください", Toast.LENGTH_SHORT).show();
+                //引数用変数
+                context = getApplicationContext();
+                final String searchSSID = editTextSSID.getText().toString();
+                //目的のSSIDがあるか確認
+                if (searcher.search(context, searchSSID) == true) {
+                    //WebViewを開く
+                    Intent intent = new Intent(MainActivity.this,LoginFormActivity.class);
+                    startActivity(intent);
                 }
                 break;
             default:
