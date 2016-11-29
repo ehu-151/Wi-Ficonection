@@ -61,15 +61,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/connect" />
+            <!--テスト用実行ボタン-->
+            <Button
+                android:text="実行"
+                android:onClick="onClick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/run" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

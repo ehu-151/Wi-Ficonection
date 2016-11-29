@@ -64,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 break;
+            case R.id.run:
+                //テスト用実行ボタン
+                //スクレイピングを開始する
+                Intent intent = new Intent(MainActivity.this,LoginFormActivity.class);
+                startActivity(intent);
+                break;
             default:
         }
     }
