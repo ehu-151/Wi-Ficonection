@@ -24,12 +24,16 @@ public class LoginFormActivity extends AppCompatActivity {
             public void run() {
                 try {
                     //Webのhtmlを取得
-                    Connection.Response response = Jsoup.connect("http://www.apple.com/jp/").execute();
+                    Connection.Response response = Jsoup.connect("https://www21.atwiki.jp/gamemusicbest100/pages/6120.html").execute();
                     Document document = response.parse();
 //                    System.out.println(document.html());
                     //IDとPassWordの値をテキストボックスに挿入する
-                    Elements doc = document.getElementsByAttribute("name").val("11");
-                    System.out.println("Elements"+doc.outerHtml());
+                    Elements elements = document.getElementsByAttributeValue("name","keyword")
+                            .select("input");
+                    //value属性の値を変更
+                    elements.val("password");
+                    System.out.println("form" + elements.forms());
+
                 } catch (IOException e) {
                 }
             }
