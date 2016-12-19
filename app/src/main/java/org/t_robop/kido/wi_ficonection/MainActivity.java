@@ -57,17 +57,23 @@ public class MainActivity extends AppCompatActivity {
                 //引数用変数
                 context = getApplicationContext();
                 final String searchSSID = editTextSSID.getText().toString();
-                //目的のSSIDがあるか確認
+                //目的のSSIDが存在するか確認
                 if (searcher.search(context, searchSSID) == true) {
-                    //WebViewを開く
+                    //jsoupを使用する
                     Intent intent = new Intent(MainActivity.this,LoginFormActivity.class);
+                    //IDとpasswordを画面遷移時に渡す
+                    intent.putExtra("ID", editTextID.getText().toString())
+                            .putExtra("password",editTextPassword.getText().toString());
                     startActivity(intent);
                 }
                 break;
             case R.id.run:
                 //テスト用実行ボタン
-                //スクレイピングを開始する
+                //jsoupを使用する
                 Intent intent = new Intent(MainActivity.this,LoginFormActivity.class);
+                //IDとpasswordを画面遷移時に渡す
+                intent.putExtra("ID", editTextID.getText().toString())
+                        .putExtra("password",editTextPassword.getText().toString());
                 startActivity(intent);
                 break;
             default:
